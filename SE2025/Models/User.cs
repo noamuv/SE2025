@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace SE2025.Models
@@ -6,9 +8,11 @@ namespace SE2025.Models
     public class User
     {
         //Primary key
+        [Key]
         public int User_ID { get; set; }
 
         //Forgein key
+        [ForeignKey("User_Type")]
         public int User_Type_ID { get; set; } // e.g., "Carer_User_ID"
 
         public string Title { get; set; } // Make eNum 'Mr', 'Mrs', 'Ms', 'Dr'?
@@ -22,7 +26,7 @@ namespace SE2025.Models
         public string Activation_Code { get; set; }
 
         //Navigation properties (relationships)
-        public User_Type UserType { get; set; }
+        public User_Type User_Type { get; set; }
 
         //Reverse navigation properties (if User can be a Carer)
         public Carer? Carer { get; set; }
