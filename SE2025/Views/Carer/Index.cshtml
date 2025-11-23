@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SE2025.Models.Carer_Access>
+
+@{
+    ViewData["Title"] = "My Patients";
+}
+<div>
+    <h2>My Patients</h2>
+
+    <div class="patient-container">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var access in Model)
+            {
+                <div class="patient-card">
+                    <div class="patient-header">
+                        <h4>@access.Patient.User.Title @access.Patient.User.First_Name @access.Patient.User.Last_Name</h4>
+                    </div>
+                    <div class="patient-details">
+                        <p><strong>Email:</strong> @access.Patient.User.Email</p>
+                    </div>
+                    <div class="patient-actions">
+                        <button><a asp-action="Details" asp-route-id="@access.Patient.User_ID">View Details</a></button>
+                    </div>
+                </div>
+                
+            }
+        }
+        else
+        {
+            <div class="alert-info">
+                <strong>ℹ️ No patients assigned</strong>
+                <p>You don't have access to any patients at this time.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .patient-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .patient-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        width: 250px;
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+    .patient-header {
+        margin-bottom: 10px;
+    }
+    .patient-details {
+        margin-bottom: 15px;
+    }
+    .patient-actions button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .patient-actions button a {
+        color: white;
+        text-decoration: none;
+    }
+    .alert-info {
+        background-color: #e7f3fe;
+        border-left: 6px solid #2196F3;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>

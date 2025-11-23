@@ -1,14 +1,20 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SE2025.Models
 {
-    public class CarerAccess
+    public class Carer_Access
     {
         //Primary key
+        [Key]
         public int Access_ID { get; set; }
 
         //Foreign keys
+        [ForeignKey("Carer")]
         public int Carer_User_ID { get; set; }
+        [ForeignKey("Patient")]
         public int Patient_User_ID { get; set; }
 
         public int Permission_Level { get; set; }
@@ -18,7 +24,10 @@ namespace SE2025.Models
         public DateTime? Revoked_At { get; set; } // Nullable to indicate access may not be revoked yet
 
         //Navigation properties (relationships)
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public Carer Carer { get; set; }
+
+        [DeleteBehavior(DeleteBehavior.Cascade)]
         public Patient Patient { get; set; }
     }
 }

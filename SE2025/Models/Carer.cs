@@ -1,10 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SE2025.Models
 {
     public class Carer
     {
         //Primary and foreign key
+        [Key]
+        [ForeignKey("User")]
         public int User_ID { get; set; }
 
         public string? Availability_Schedule { get; set; } //? indicates that the property can be null
@@ -13,7 +17,7 @@ namespace SE2025.Models
         public User User { get; set; }
 
         //Collection (a carer can have multiple access records)
-        public ICollection<CarerAccess> CarerAccesses { get; set; }
+        public ICollection<Carer_Access> Carer_Accesses { get; set; }
     }
 }
 
